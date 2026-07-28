@@ -401,8 +401,6 @@ This allows GitHub Actions to deploy to AWS without storing long-lived AWS keys 
 Open CMD and run these commands one by one:
 
 ```
-cd "D:\MAJOR PROJECT KRISH SIR\ai-code-reviewer"
-```
 
 ```
 git init
@@ -539,8 +537,6 @@ This step creates all the AWS resources your system needs: the Kubernetes cluste
 
 ### 11.1 Open CMD and navigate to the Terraform folder
 
-```
-cd "D:\MAJOR PROJECT KRISH SIR\ai-code-reviewer\infra\terraform"
 ```
 
 ### 11.2 Initialize Terraform
@@ -704,8 +700,6 @@ git push origin main
 This push touches all service directories so all 5 pipelines trigger simultaneously.
 
 ### 13.2 Watch the pipelines run
-
-1. Go to https://github.com/data-guru0/MAJOR-PROJECT-KRISH-SIR
 2. Click the "Actions" tab at the top
 3. You will see **5 separate workflow runs** all starting at the same time — one per service
 4. Click on any of them to watch it
@@ -737,8 +731,6 @@ After you finish Phase 12 (applying all Kubernetes manifests), you must re-run a
 
 Each service folder has a `deploy.txt` file specifically for this purpose. Increment the number inside it to trigger pipelines without touching any actual code:
 
-```
-cd "D:\MAJOR PROJECT KRISH SIR\ai-code-reviewer"
 ```
 
 ```
@@ -823,8 +815,6 @@ This deploys all your services onto the EKS cluster.
 **Why this matters:** The `configmap.yaml` file has a placeholder Redis URL. If you skip this step, all services will fail to connect to Redis (ElastiCache) and the entire system will return 500 errors silently.
 
 First get your Redis endpoint from Terraform:
-```
-cd "D:\MAJOR PROJECT KRISH SIR\ai-code-reviewer\infra\terraform"
 terraform output
 ```
 
@@ -834,8 +824,6 @@ ai-code-reviewer-redis.khmhzg.0001.use1.cache.amazonaws.com:6379
 ```
 
 Now open the ConfigMap file:
-```
-notepad "D:\MAJOR PROJECT KRISH SIR\ai-code-reviewer\infra\k8s\configmap.yaml"
 ```
 
 Find this line:
@@ -861,8 +849,6 @@ You need to open and edit `infra\k8s\secret.yaml` with your actual secret values
 
 Open CMD:
 
-```
-notepad "D:\MAJOR PROJECT KRISH SIR\ai-code-reviewer\infra\k8s\secret.yaml"
 ```
 
 Replace all the empty values with your real values. The file should look like this when done:
@@ -896,8 +882,6 @@ stringData:
 
 ### 15.2 Navigate to the k8s folder
 
-```
-cd "D:\MAJOR PROJECT KRISH SIR\ai-code-reviewer\infra\k8s"
 ```
 
 ### 15.3 Apply everything in exact order
@@ -1124,9 +1108,6 @@ All pods should show `Running`. It may take a few minutes.
 
 Your project already has a config file that tells Prometheus where to find all 5 services. Apply it:
 
-```
-kubectl create configmap prometheus-config --from-file=prometheus.yml="D:\MAJOR PROJECT KRISH SIR\ai-code-reviewer\monitoring\prometheus.yml" -n monitoring --dry-run=client -o yaml | kubectl apply -f -
-```
 
 ### 16.5 Install Grafana
 
@@ -1218,7 +1199,6 @@ Your project already has a complete Grafana dashboard saved as a JSON file.
 1. In Grafana, click the "+" icon in the left sidebar
 2. Click "Import"
 3. Click "Upload JSON file"
-4. Navigate to `D:\MAJOR PROJECT KRISH SIR\ai-code-reviewer\monitoring\grafana-dashboard.json`
 5. Select the Prometheus data source you just added
 6. Click "Import"
 
@@ -1364,8 +1344,6 @@ All pods must show `Running`. If any show `Pending` or `CrashLoopBackOff`, wait 
 
 Increment the deploy.txt files to trigger all pipelines:
 
-```
-cd "D:\MAJOR PROJECT KRISH SIR\ai-code-reviewer"
 ```
 
 ```
@@ -1704,7 +1682,6 @@ aws eks update-kubeconfig --name ai-code-reviewer --region us-east-1
 
 **To pause the system and stop all charges:**
 ```
-cd "D:\MAJOR PROJECT KRISH SIR\ai-code-reviewer\infra\terraform"
 terraform destroy -var="cluster_name=ai-code-reviewer" -var="db_password=YourStrongPassword123!"
 ```
 Type `yes` when asked. This deletes everything on AWS. You can recreate it later with `terraform apply`.
@@ -1752,7 +1729,6 @@ Scale a service:
   kubectl scale deployment orchestrator --replicas=4
 
 Shut down everything (stop AWS charges):
-  cd "D:\MAJOR PROJECT KRISH SIR\ai-code-reviewer\infra\terraform"
   terraform destroy -var="cluster_name=ai-code-reviewer" -var="db_password=YourStrongPassword123!" -var="environment=production"
 ```
 
@@ -1764,8 +1740,6 @@ Run this when you want to shut everything down and stop all AWS charges.
 
 ### 25.1 Destroy all AWS infrastructure
 
-```
-cd "D:\MAJOR PROJECT KRISH SIR\ai-code-reviewer\infra\terraform"
 ```
 
 ```
