@@ -2,7 +2,6 @@
 
 This document covers everything from zero to a fully running production system.
 All commands are for Windows Command Prompt (CMD). Open CMD by pressing Win + R, type `cmd`, press Enter.
-Follow every step in exact order. Do not skip anything.
 
 ---
 
